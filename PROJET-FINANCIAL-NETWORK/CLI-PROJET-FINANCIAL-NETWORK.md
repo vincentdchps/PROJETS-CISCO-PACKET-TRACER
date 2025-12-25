@@ -3,6 +3,7 @@
 ## Switch 2960 HR-SW
 
 ```
+--configuration de base
 en
 conf t
 
@@ -20,6 +21,23 @@ banner motd #NO UNAUTHORISED ACCESS!!#
 no ip domain lookup 
 
 service password-encryption
+
+--vlan
+vlan 10
+name DATA
+vlan 120
+name VOICE
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 10
+switchport voice vlan 120
+exit
 
 do wr
 ```
@@ -45,6 +63,24 @@ no ip domain lookup
 
 service password-encryption
 
+--vlan
+vlan 20
+name DATA
+vlan 120
+name VOICE
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 20
+switchport voice vlan 120
+exit
+
+
 do wr
 ```
 
@@ -68,6 +104,24 @@ banner motd #NO UNAUTHORISED ACCESS!!#
 no ip domain lookup 
 
 service password-encryption
+
+--vlan
+vlan 30
+name DATA
+vlan 120
+name VOICE
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 30
+switchport voice vlan 120
+exit
+
 
 do wr
 ```
@@ -94,6 +148,24 @@ no ip domain lookup
 
 service password-encryption
 
+--vlan
+vlan 40
+name DATA
+vlan 120
+name VOICE
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 40
+switchport voice vlan 120
+exit
+
+
 do wr
 ```
 
@@ -117,6 +189,24 @@ banner motd #NO UNAUTHORISED ACCESS!!#
 no ip domain lookup 
 
 service password-encryption
+
+--vlan
+vlan 50
+name DATA
+vlan 120
+name VOICE
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 50
+switchport voice vlan 120
+exit
+
 
 do wr
 ```
@@ -175,7 +265,24 @@ line vty 0 15
 login local
 transport input ssh
 exit
+--vlan 
+int range gig1/0/2-7
+switchport mode trunk
+exit
 
+vlan 10
+name HR
+vlan 20
+name CS
+vlan 30
+name MK
+vlan 40
+name LM
+vlan 50
+name IT
+vlan 120
+name VOICE
+exit
 do wr
 ```
 ## Switch Layer 3 3650 HQ-MSLW2
@@ -208,6 +315,26 @@ line vty 0 15
 login local
 transport input ssh
 exit
+
+--vlan
+int range gig1/0/2-6
+switchport mode trunk
+exit
+
+vlan 10
+name HR
+vlan 20
+name CS
+vlan 30
+name MK
+vlan 40
+name LM
+vlan 50
+name IT
+vlan 120
+name VOICE
+exit
+
 
 do wr
 ```
@@ -278,6 +405,17 @@ login local
 transport input ssh
 exit
 
+int range fa0/2-5
+switchport mode access
+switchport port-security
+switchport port-security maximum 1
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+int range fa0/6-24, gig 0/1-2
+switchport mode access
+switchport access vlan 99
+shutdown
+exit
 do wr
 ```
 
