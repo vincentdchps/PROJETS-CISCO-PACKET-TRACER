@@ -289,6 +289,13 @@ no switchport
 ip add 192.168.21.17 255.255.255.252
 no shut
 do wr
+
+ip routing
+router ospf 10
+router-id 1.1.1.1
+network 10.10.10.0 0.0.0.255 area 0
+network 192.168.21.16 0.0.0.3 area 0
+network 192.168.20.0 0.0.0.255 area 0
 ```
 ## Switch Layer 3 3650 HQ-MSLW2
 
@@ -344,6 +351,12 @@ interface GigabitEthernet1/0/1
 no switchport
 ip add 192.168.21.21 255.255.255.252
 no shut
+
+ip routing
+router ospf 10
+router-id 2.2.2.2network 10.10.10.0 0.0.0.255 area 0
+network 192.168.21.20 0.0.0.3 area 0
+network 192.168.20.0 0.0.0.255 area 0
 
 do wr
 ```
@@ -513,6 +526,12 @@ no ip address
 int fa 0/0.120
 encapsulation dot1Q 120
 ip add 10.10.10.1 255.255.255.0
+exit
+
+router ospf 10 
+router-id 3.3.3.3
+network 10.10.10.0 0.0.0.255 area 0
+
 exit
 
 
