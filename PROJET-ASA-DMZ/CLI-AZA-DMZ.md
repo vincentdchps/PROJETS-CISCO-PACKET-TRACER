@@ -50,8 +50,5 @@ interface Ethernet0/2
  switchport access vlan 3
  no shut
  exit
-```
-
-! 3. Route par défaut vers le FAI (La sortie)
 route OUTSIDE 0.0.0.0 0.0.0.0 203.0.113.1
 ```
