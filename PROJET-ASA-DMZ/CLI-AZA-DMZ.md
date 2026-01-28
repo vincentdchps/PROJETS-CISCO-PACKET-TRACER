@@ -52,3 +52,23 @@ interface Ethernet0/2
  exit
 route OUTSIDE 0.0.0.0 0.0.0.0 203.0.113.1
 ```
+
+
+## Router FAI-ISP
+
+```
+enable
+conf t
+hostname FAI-ISP
+
+interface g0/0
+ ip address 203.0.113.1 255.255.255.252
+ no shut
+ exit
+
+interface g0/1
+ ip address 8.8.8.1 255.255.255.0
+ no shut
+ exit
+```
+
