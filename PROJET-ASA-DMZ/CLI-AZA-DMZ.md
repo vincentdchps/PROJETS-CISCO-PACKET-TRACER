@@ -72,3 +72,40 @@ interface g0/1
  exit
 ```
 
+
+## Switch 2960 Employes 
+
+```cisco
+enable
+conf t
+hostname SW-INSIDE-SECURE
+
+vlan 10
+ name EMPLOYES
+ exit
+
+interface g0/1
+ switchport mode access
+ switchport access vlan 10
+ ip dhcp snooping trust
+ exit
+
+
+interface range f0/1-24
+ switchport mode access
+ switchport access vlan 10
+
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+
+ no ip dhcp snooping trust
+ 
+ spanning-tree bpduguard enable
+ exit
+
+ip dhcp snooping
+ip dhcp snooping vlan 10
+```
+
