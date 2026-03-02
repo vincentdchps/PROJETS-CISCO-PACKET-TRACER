@@ -51,6 +51,23 @@ interface Ethernet0/2
  no shut
  exit
 route OUTSIDE 0.0.0.0 0.0.0.0 203.0.113.1
+
+conf t
+policy-map global_policy
+ class inspection_default
+  inspect icmp
+ exit
+exit
+
+object network OBJ_INSIDE_LAN
+ subnet 192.168.10.0 255.255.255.0
+ nat (INSIDE,OUTSIDE) dynamic interface
+ exit
+
+object network OBJ_WEB_SERVER
+ host 172.16.50.10
+ nat (DMZ,OUTSIDE) static interface service tcp 80 80
+ exit
 ```
 
 
